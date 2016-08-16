@@ -1,0 +1,9 @@
+buildings:
+    type: rest
+    resource: "@DoubleGisTestBundle/Resources/config/routing/buildings.yml"
+organizations:
+    type: rest
+    resource: "@DoubleGisTestBundle/Resources/config/routing/organizations.yml"
+categories:
+    type: rest
+    resource: "@DoubleGisTestBundle/Resources/config/routing/categories.yml"

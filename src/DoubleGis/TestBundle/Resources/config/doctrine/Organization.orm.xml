@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DoubleGis\TestBundle\Entity\Organization" table="organization" repository-class="DoubleGis\TestBundle\Doctrine\ORM\OrganizationRepository">
+    <indexes>
+      <index name="fk_organization_building" columns="building_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="128" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="building" target-entity="Building" inversed-by="organizations" fetch="LAZY">
+      <join-columns>
+        <join-column name="building_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="phones" target-entity="PhoneNumber" inversed-by="organization" fetch="LAZY">
+      <join-table name="organization_phones">
+        <join-columns>
+          <join-column name="organization_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="phone_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="categories" target-entity="Category" inversed-by="organizations" fetch="LAZY">
+      <join-table name="organization_categories">
+        <join-columns>
+          <join-column name="organization_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="category_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

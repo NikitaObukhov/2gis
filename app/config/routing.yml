@@ -1,0 +1,4 @@
+double_gis_test:
+    resource: "@DoubleGisTestBundle/Resources/config/routing/routing.yml"
+    prefix:   /
+

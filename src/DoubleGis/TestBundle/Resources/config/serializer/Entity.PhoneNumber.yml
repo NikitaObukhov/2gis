@@ -1,0 +1,5 @@
+DoubleGis\TestBundle\Entity\PhoneNumber:
+  exclusion_policy: ALL
+  properties:
+    number:
+      expose: true

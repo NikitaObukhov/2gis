@@ -1,0 +1,11 @@
+DoubleGis\TestBundle\Entity\Organization:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+    address:
+      expose: true
+    categories:
+      expose: true
+    phones:
+      expose: true
