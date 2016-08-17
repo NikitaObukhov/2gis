@@ -20,6 +20,7 @@ class LoadBuildingData implements FixtureInterface, DependentFixtureInterface
             $manager->persist($building);
             if (0 === $key % 100) {
                 $manager->flush();
+                $manager->clear('DoubleGis\TestBundle\Entity\Building');
             }
         }
         $manager->flush();

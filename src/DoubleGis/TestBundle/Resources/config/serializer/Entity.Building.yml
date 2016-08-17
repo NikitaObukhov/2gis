@@ -1,9 +1,7 @@
 DoubleGis\TestBundle\Entity\Building:
   exclusion_policy: ALL
   properties:
+    id:
+      expose: true
     address:
       expose: true
-  relations:
-      - rel: organizations
-        embedded:
-            content: expr(object.getOrganizations())

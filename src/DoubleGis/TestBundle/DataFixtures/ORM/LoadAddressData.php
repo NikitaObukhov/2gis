@@ -23,9 +23,12 @@ class LoadAddressData implements FixtureInterface
         $j = 0;
         $lat = 55;
         $lon = 83;
+        $connection = $manager->getConnection();
+        /* @var $connection \Doctrine\DBAL\Connection */
+        $connection->setAutoCommit(false);
         foreach($streets as $street) {
             $lat += 0.005;
-            for ($i = 0, $max = mt_rand(10, 50); $i < $max; $i++) {
+            for ($i = 0, $max = mt_rand(80, 140); $i < $max; $i++) {
                 $lon += 0.005;
                 $address = new Address();
                 $address->setStreet($street);
@@ -43,6 +46,8 @@ class LoadAddressData implements FixtureInterface
                 }
                 if (0 === $j % 100) {
                     $manager->flush();
+                    $manager->clear('DoubleGis\TestBundle\Entity\Address');
+                    $connection->commit();
                 }
             }
         }
