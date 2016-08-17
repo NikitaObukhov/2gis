@@ -7,3 +7,6 @@ organizations:
 categories:
     type: rest
     resource: "@DoubleGisTestBundle/Resources/config/routing/categories.yml"
+doc:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /doc

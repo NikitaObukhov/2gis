@@ -51,4 +51,50 @@ class Building
     {
         return $this->address;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $organizations;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->organizations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add organization
+     *
+     * @param \DoubleGis\TestBundle\Entity\Organization $organization
+     *
+     * @return Building
+     */
+    public function addOrganization(\DoubleGis\TestBundle\Entity\Organization $organization)
+    {
+        $this->organizations[] = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Remove organization
+     *
+     * @param \DoubleGis\TestBundle\Entity\Organization $organization
+     */
+    public function removeOrganization(\DoubleGis\TestBundle\Entity\Organization $organization)
+    {
+        $this->organizations->removeElement($organization);
+    }
+
+    /**
+     * Get organizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizations()
+    {
+        return $this->organizations;
+    }
 }

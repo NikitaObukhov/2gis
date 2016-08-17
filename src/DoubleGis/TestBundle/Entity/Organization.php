@@ -8,26 +8,36 @@ namespace DoubleGis\TestBundle\Entity;
 class Organization
 {
     /**
+     * Organization name
+     *
      * @var string
      */
     private $name;
 
     /**
+     * Unique organization ID
+     *
      * @var integer
      */
     private $id;
 
     /**
+     * Building where organization is
+     *
      * @var \DoubleGis\TestBundle\Entity\Building
      */
     private $building;
 
     /**
+     * List of organization phone numbers
+     *
      * @var \Doctrine\Common\Collections\Collection
      */
     private $phones;
 
     /**
+     * List of organization categories
+     *
      * @var \Doctrine\Common\Collections\Collection
      */
     private $categories;

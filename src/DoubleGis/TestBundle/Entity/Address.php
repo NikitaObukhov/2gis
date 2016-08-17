@@ -8,20 +8,39 @@ namespace DoubleGis\TestBundle\Entity;
 class Address
 {
     /**
+     * Street name
+     *
      * @var string
      */
     private $street;
 
     /**
+     * House number
+     *
      * @var string
      */
     private $house;
 
     /**
+     * Unique address ID
+     *
      * @var integer
      */
     private $id;
 
+    /**
+     * Geo coordinate
+     * 
+     * @var float
+     */
+    private $lat;
+
+    /**
+     * Geo coordinate
+     *
+     * @var float
+     */
+    private $lon;
 
     /**
      * Set street
@@ -80,16 +99,6 @@ class Address
     {
         return $this->id;
     }
-    /**
-     * @var float
-     */
-    private $lat;
-
-    /**
-     * @var float
-     */
-    private $lon;
-
 
     /**
      * Set lat

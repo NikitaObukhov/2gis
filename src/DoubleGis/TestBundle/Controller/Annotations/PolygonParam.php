@@ -21,15 +21,13 @@ class PolygonParam extends QueryParam
 
     public function getConstraints()
     {
-        $constraints = parent::getConstraints();
         $that = $this;
-        $constraint = new Callback(['callback' => function(Polygon $polygon) use ($that) {
-            if ($that->mustBeClosed && false === $polygon->isClosed()) {
+        $constraint = new Callback(['callback' => function(Polygon $polygon = null) use ($that) {
+            if ($polygon && $that->mustBeClosed && false === $polygon->isClosed()) {
                 throw new ValidatorException('Polygon is not closed.');
             }
         }]);
-        $constraints[] = $constraint;
-        return $constraints;
+        return array($constraint);
     }
 
     public function isStrict()

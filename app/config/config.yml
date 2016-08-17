@@ -103,3 +103,14 @@ fos_rest:
     access_denied_listener:
         json: true
     body_listener: true
+
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            tree: true
+
+nelmio_api_doc:
+    name: '2gis test documentation'
+    motd:
+        template: 'DoubleGisTestBundle::Nelmio/motd.html.twig'

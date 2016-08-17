@@ -14,6 +14,22 @@
         <option name="fixed"/>
       </options>
     </field>
+    <many-to-many field="organizations" target-entity="Organization" mapped-by="categories" fetch="LAZY"/>
+    <field name="left" column="lft" type="integer">
+      <gedmo:tree-left/>
+    </field>
+    <field name="right" column="rgt" type="integer">
+      <gedmo:tree-right/>
+    </field>
+    <field name="level" column="lvl" type="integer">
+      <gedmo:tree-level/>
+    </field>
+
+    <many-to-one field="root" target-entity="Category">
+      <join-column name="tree_root" referenced-column-name="id" on-delete="CASCADE"/>
+      <gedmo:tree-root/>
+    </many-to-one>
+
     <many-to-one field="parent" target-entity="Category" fetch="LAZY">
       <join-columns>
         <join-column name="parent_id" referenced-column-name="id"/>
@@ -23,6 +39,13 @@
         <cascade-remove/>
       </cascade>
     </many-to-one>
-    <many-to-many field="organizations" target-entity="Organization" mapped-by="categories" fetch="LAZY"/>
+    <one-to-many field="children" target-entity="Category" mapped-by="parent">
+      <order-by>
+        <order-by-field name="left" direction="ASC" />
+      </order-by>
+    </one-to-many>
+
+    <gedmo:tree type="nested"/>
+
   </entity>
 </doctrine-mapping>

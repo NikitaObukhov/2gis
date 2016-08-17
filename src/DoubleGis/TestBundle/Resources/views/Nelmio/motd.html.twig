@@ -1,0 +1,82 @@
+<div class="motd">
+    <p>This is documentation for test 2gis API. Please note that it follows <a href="https://en.wikipedia.org/wiki/HATEOAS">HATEOAS</a> principle. See reference <a href="http://hateoas-php.org/">here</a>.</p>
+
+    <p>Basically it means all collections are paginated and all entities include references to their associations. For paginations the following parameters are used:
+    <ul>
+        <li><i>limit</i> &mdash; how many results to return. Default value is <i>20</i></li>
+        <li><i>page</i> &mdash; number of page. Default is <i>1</i></li>
+    </ul>
+    Also in the response you will see <i>pages</i> and <i>total</i> fields, total number of pages and results.
+    </p>
+
+    <p>You can test all methods using <b>Sandbox</b> tab. One exception is GET /organizations/map method - it returns HTML with map and should be called from browser.</p>
+
+    <p>
+        <strong>Example requests:</strong>
+        <ul>
+        <li>
+            {% set url = path('get_organizations_map', {'circle': '640,55.005,83.08'}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            This will display organizations located in a circle with center at <i>55.005,83.08</i> with radius of <i>640</i> meters.
+        </li>
+        <li>
+            {% set url = path('get_organizations_map', {'polygon': '55.042188,82.978363;55.037467,83.180237;54.927536,83.29422;54.931482,82.997589; 55.042188,82.978363'}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Display organizations located in polygon.
+        </li>
+
+        <li>
+            {% set url = path('get_organizations', {'polygon': '55.042188,82.978363;55.037467,83.180237;54.927536,83.29422;54.931482,82.997589; 55.042188,82.978363'}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Same as above, but returns JSON not a map.
+        </li>
+
+        <li>
+            {% set url = path('get_organizations', {'category_id': 9}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get organizatons in category 9.
+        </li>
+
+        <li>
+            {% set url = path('get_organizations', {'name': 221}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get organizations that have "221" in part of their name.
+        </li>
+
+        <li>
+            {% set url = path('get_organizations', {'category_ancestor_id': 9}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get organizatons in descendants of category 9.
+        </li>
+
+        <li>
+            {% set url = path('get_buildings') %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get list of buildings
+        </li>
+
+        <li>
+            {% set url = path('get_building_organizations', {'id': 1}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get organizations in building with ID=1
+        </li>
+
+        <li>
+            {% set url = path('get_categories', {'parent_id': 9}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get direct children of category 9
+        </li>
+
+        <li>
+            {% set url = path('get_categories', {'parent_id': 9, 'scope': 'tree'}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get direct children of category 9. Children are returned in tree scope, it means that their children are embedded in response.
+        </li>
+        <li>
+            {% set url = path('get_categories', {'ancestor_id': 9}) %}
+            <a href="{{ url }}">{{ url }}</a><br/>
+            Get all descendants of category 9
+        </li>
+    </ul>
+    </p>
+</div>

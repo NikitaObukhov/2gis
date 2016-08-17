@@ -8,11 +8,15 @@ namespace DoubleGis\TestBundle\Entity;
 class Building
 {
     /**
+     * Unique building ID
+     *
      * @var integer
      */
     private $id;
 
     /**
+     * Building address
+     *
      * @var \DoubleGis\TestBundle\Entity\Address
      */
     private $address;

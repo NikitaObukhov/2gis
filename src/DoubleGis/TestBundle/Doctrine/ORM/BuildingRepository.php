@@ -2,7 +2,9 @@
 
 namespace DoubleGis\TestBundle\Doctrine\ORM;
 
-class BuildingRepository extends ResourceRepository
-{
+use Doctrine\ORM\EntityRepository;
 
+class BuildingRepository extends EntityRepository
+{
+    use ResourceRepositoryTrait;
 }

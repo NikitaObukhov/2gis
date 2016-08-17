@@ -7,6 +7,7 @@ use Hateoas\Configuration\Route;
 use Hateoas\Hateoas;
 use Hateoas\HateoasBuilder;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -53,18 +54,27 @@ abstract class ResourceController extends FOSRestController
 
         return $this->view($paginator);
     }
-
-    protected function findOr404()
+    
+    protected function createPaginatedViewFromArray(array $array, Request $request)
     {
-        if (null === $resource =$this->findOrNull()) {
+        $paginator = new Pagerfanta(new ArrayAdapter($array));
+        return $this->createViewFromPaginator($paginator, $request);
+    }
+
+    protected function findOr404($id = null)
+    {
+        if (null === $resource =$this->findOrNull($id)) {
             throw $this->createNotFoundException();
         }
         return $resource;
     }
 
-    protected function findOrNull()
+    protected function findOrNull($id = null)
     {
-        $criteria = array('id' => $this->getRequest()->get('id'));
+        if (null === $id) {
+            $id = $this->getRequest()->get('id');
+        }
+        $criteria = array('id' => $id);
         return $this->getRepository()->findOneBy($criteria);
     }
 
@@ -88,6 +98,21 @@ abstract class ResourceController extends FOSRestController
     {
         return $this->container->get('request_stack')->getCurrentRequest();
     }
+
+    protected function view($data = null, $statusCode = null, array $headers = [])
+    {
+        $view = parent::view($data, $statusCode, $headers);
+        $view->getContext()->addGroup('Default');
+        $scopes = $this->getRequest()->get('scope', null);
+        if (null !== $scopes) {
+            $scopes = explode(',', $scopes);
+            foreach($scopes as $scope) {
+                $view->getContext()->addGroup($scope);
+            }
+        }
+        return $view;
+    }
+
 
     abstract protected function getResourceClass();
 }

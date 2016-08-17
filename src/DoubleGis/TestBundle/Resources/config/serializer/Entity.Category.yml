@@ -5,3 +5,9 @@ DoubleGis\TestBundle\Entity\Category:
       expose: true
     name:
       expose: true
+  relations:
+      - rel: children
+        embedded:
+            content: expr(object.getChildren())
+        exclusion:
+            groups: [tree]

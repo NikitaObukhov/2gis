@@ -3,7 +3,9 @@ DoubleGis\TestBundle\Entity\Organization:
   properties:
     id:
       expose: true
-    address:
+    name:
+      expose: true
+    building:
       expose: true
     categories:
       expose: true

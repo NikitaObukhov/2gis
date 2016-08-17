@@ -8,7 +8,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
 
-class ResourceRepository extends EntityRepository
+trait ResourceRepositoryTrait
 {
 
     public function createPaginator()

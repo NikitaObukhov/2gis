@@ -1,4 +1,10 @@
 services:
-#    double_gis_test.example:
-#        class: DoubleGis\TestBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    double_gis_test.repository.category:
+        class: DoubleGis\TestBundle\Doctrine\ORM\CategoryRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - DoubleGis\TestBundle\Entity\Category
+    double_gis_test.organization_search_params:
+        class: DoubleGis\TestBundle\Doctrine\ORM\OrganizationSearchParams
+        factory: ['DoubleGis\TestBundle\Doctrine\ORM\OrganizationSearchParams', createFromParamFetcher]
+        arguments: ['@fos_rest.request.param_fetcher', '@double_gis_test.repository.category']

@@ -8,6 +8,8 @@ namespace DoubleGis\TestBundle\Entity;
 class PhoneNumber
 {
     /**
+     * Phone number
+     *
      * @var string
      */
     private $number;
