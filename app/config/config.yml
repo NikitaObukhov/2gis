@@ -23,7 +23,8 @@ framework:
         engines: ['twig']
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
+    trusted_proxies:
+      [172.0.0.0/8]
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
@@ -31,6 +32,9 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
+
+sensio_framework_extra: ~
+
 
 # Twig Configuration
 twig:
@@ -115,3 +119,22 @@ nelmio_api_doc:
     name: '2gis test documentation'
     motd:
         template: 'DoubleGisTestBundle::Nelmio/motd.html.twig'
+
+fos_http_cache:
+    proxy_client:
+        varnish:
+            servers: varnish
+            base_url: laptop
+    cache_control:
+        defaults:
+            overwrite: false
+        rules:
+            -
+                match:
+                    path: ^/
+                headers:
+                    cache_control:
+                        public: true
+                        max_age: 64000
+                        s_maxage: 64000
+                    etag: true
