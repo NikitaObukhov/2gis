@@ -14,13 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 abstract class ResourceController extends FOSRestController
 {
 
-    public function indexAction(Request $request)
+    protected function indexAction(Request $request)
     {
         $repository = $this->getRepository();
         return $this->createViewFromPaginator($repository->createPaginator(), $request);
     }
     
-    public function associationAction(Request $request, $id, $associationField)
+    protected function associationAction(Request $request, $id, $associationField)
     {
         $repository = $this->getRepository();
         $resources = $repository->createAssociationPaginatorForParentEntity($id, $associationField);
@@ -36,7 +36,7 @@ abstract class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
-    public function showAction(Request $request)
+    protected function showAction(Request $request)
     {
         $resource = $this->findOr404();
         return $this->view($resource);
