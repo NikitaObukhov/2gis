@@ -1,0 +1,11 @@
+DoubleGis\TestBundle\Entity\Address:
+  exclusion_policy: ALL
+  properties:
+    street:
+      expose: true
+    house:
+      expose: true
+    lat:
+      expose: true
+    lon:
+      expose: true

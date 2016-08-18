@@ -1,0 +1,7 @@
+buildings:
+    type:     rest
+    resource: DoubleGis\TestBundle\Controller\BuildingController
+organizations:
+    type: rest
+    parent: buildings
+    resource: DoubleGis\TestBundle\Controller\BuildingOrganizationsController

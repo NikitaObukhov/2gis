@@ -1,0 +1,3 @@
+categories:
+    type:     rest
+    resource: DoubleGis\TestBundle\Controller\CategoryController
